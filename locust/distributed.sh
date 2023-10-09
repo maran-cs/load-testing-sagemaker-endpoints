@@ -1,13 +1,12 @@
 #replace with your endpoint name in format https://<<endpoint-name>>
-export ENDPOINT_NAME=https://$1
+export ENDPOINT_NAME=https://jumpstart-dft-meta-textgeneration-llama-codellama-34b
 
 export REGION=us-east-1
 export CONTENT_TYPE=application/json
-export PAYLOAD='{"inputs": "I am super happy right now."}'
-export USERS=240
-export WORKERS=60
-export RUN_TIME=1mg
-export LOCUST_UI=false # Use Locust UI
+export USERS=1
+export WORKERS=1
+export RUN_TIME=5m
+export LOCUST_UI=true # Use Locust UI
 
 
 #replace with the locust script that you are testing, this is the locust_script that will be used to make the InvokeEndpoint API calls. 
@@ -23,6 +22,7 @@ else
 fi
 
 for (( c=1; c<=$WORKERS; c++ ))
-do 
+do
     locust -f $SCRIPT -H $ENDPOINT_NAME --worker --master-host=localhost &
 done
+~       

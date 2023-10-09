@@ -9,10 +9,13 @@ from locust.contrib.fasthttp import FastHttpUser
 
 from locust import task, events
 
+prompt = """\ import socket
+     def ping_exponential_backoff(host: str):\
+"""
 region = os.environ["REGION"]
 content_type = os.environ["CONTENT_TYPE"]
-payload = os.environ["PAYLOAD"]
-
+#payload = os.environ["PAYLOAD"]
+payload = {"inputs": prompt, "parameters": {"max_new_tokens": 256, "temperature": 0.2, "top_p": 0.9}}
 
 class BotoClient:
     def __init__(self, host):
@@ -42,10 +45,11 @@ class BotoClient:
         try:
             response = self.sagemaker_client.invoke_endpoint(
                 EndpointName=self.endpoint_name,
-                Body=self.payload,
+                Body=json.dumps(self.payload),
                 ContentType=self.content_type,
+                CustomAttributes="accept_eula=true"
             )
-            logging.info(response["Body"].read())
+            logging.info(response["Body"].read().decode("utf8"))
         except Exception as e:
             request_meta["exception"] = e
 
