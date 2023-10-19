@@ -9,9 +9,9 @@ from locust.contrib.fasthttp import FastHttpUser
 
 from locust import task, events
 
-prompt = """\ import socket
-     def ping_exponential_backoff(host: str):\
-"""
+prompt = [
+    "Simply put, the theory of relativity states that "
+]
 region = os.environ["REGION"]
 content_type = os.environ["CONTENT_TYPE"]
 #payload = os.environ["PAYLOAD"]

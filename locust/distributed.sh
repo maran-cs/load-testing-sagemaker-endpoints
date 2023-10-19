@@ -1,9 +1,9 @@
 #replace with your endpoint name in format https://<<endpoint-name>>
-export ENDPOINT_NAME=https://jumpstart-dft-meta-textgeneration-llama-codellama-34b
+export ENDPOINT_NAME=https://jumpstart-dft-meta-textgeneration-llama-2-7b
 
 export REGION=us-east-1
 export CONTENT_TYPE=application/json
-export USERS=1
+export USERS=5
 export WORKERS=1
 export RUN_TIME=5m
 export LOCUST_UI=true # Use Locust UI
